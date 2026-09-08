@@ -43,7 +43,10 @@ Ajouter et vérifier le domaine d’envoi dans Resend, publier les entrées SPF 
 ## Vercel
 
 1. Importer ce dépôt dans Vercel avec le preset Next.js.
-2. Ajouter toutes les variables de `.env.example` aux environnements Production et Preview.
+2. Ajouter au minimum `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+   `SUPABASE_SERVICE_ROLE_KEY` et `NEXT_PUBLIC_SITE_URL` aux environnements
+   **Production** et **Preview**. Les noms doivent correspondre exactement à ceux de
+   `.env.example` ; `SUPABASE_URL`, par exemple, n’est pas utilisé par l’application.
 3. Déployer, puis associer `tour.zoh-henan.com` dans **Settings → Domains**.
 4. Mettre `NEXT_PUBLIC_SITE_URL=https://tour.zoh-henan.com` et redéployer.
 

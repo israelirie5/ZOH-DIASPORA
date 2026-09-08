@@ -11,6 +11,19 @@ const serverSchema = z.object({
 
 export function serverEnv() {
   const result = serverSchema.safeParse(process.env);
-  if (!result.success) throw new Error("Configuration serveur incomplète.");
+  if (!result.success) {
+    const invalidVariables = [
+      ...new Set(
+        result.error.issues
+          .map((issue) => issue.path[0])
+          .filter((key): key is string => typeof key === "string"),
+      ),
+    ];
+
+    throw new Error(
+      `Configuration serveur incomplète : ${invalidVariables.join(", ")}.`,
+    );
+  }
+
   return result.data;
 }

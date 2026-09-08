@@ -3,6 +3,10 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { RegistrationForm } from "@/components/registration-form";
 import type { Event } from "@/types/database";
 
+// Events are fetched from Supabase at request time. This also prevents the
+// production build from requiring runtime-only Supabase secrets while prerendering.
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const { data } = await createAdminClient().from("events").select("*").eq("is_active", true).order("event_date");
   const events = (data ?? []) as Event[];
